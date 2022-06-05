@@ -28,14 +28,17 @@ function playRound(playerSelection, computerSelection) {
 }
 
 /* plays a game of 5 rounds and decides who wins the game */
-/*
-function game() {
+
+/*function game() {
     let playerPoints = 0;
     let computerPoints = 0;
+
+
+
     for (i = 0; i < 5; i++) {
-        console.log(`Round ${i + 1}!`)
+        round.textContent = `Round ${i + 1}!`;
         
-        let player = prompt('Choose: ');
+        
         console.log(`You chose ${player}`);
 
         let computer = computerPlay();
@@ -59,17 +62,27 @@ function game() {
         console.log('This game is a tie');
     }
 }
-
-game();
 */
 
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.rps');
+const result = document.querySelector('.result');
+const round = document.querySelector('.round');
+const play = document.querySelector('.play');
+const playerText = document.querySelector('.player');
+const computerText = document.querySelector('.computer');
 
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-    console.log(playRound(button.className, computerPlay()));
+        playerText.textContent = `You chose ${button.textContent}`;
+        let computer = computerPlay();
+        computerText.textContent = `The computer chose ${computer}`;
+        let roundResult = playRound(button.textContent, computer);
+        result.textContent = roundResult;
     });
 });
 
-
+/*play.addEventListener('click', () => {
+    game();
+});
+*/

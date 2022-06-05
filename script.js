@@ -27,8 +27,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-/* plays a game of 3 rounds and decides who wins the game */
-
+/* plays a game of 5 rounds and decides who wins the game */
+/*
 function game() {
     let playerPoints = 0;
     let computerPoints = 0;
@@ -61,3 +61,15 @@ function game() {
 }
 
 game();
+*/
+
+const buttons = document.querySelectorAll('button');
+
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+    console.log(playRound(button.className, computerPlay()));
+    });
+});
+
+

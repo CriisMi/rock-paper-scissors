@@ -29,60 +29,74 @@ function playRound(playerSelection, computerSelection) {
 
 /* plays a game of 5 rounds and decides who wins the game */
 
-/*function game() {
-    let playerPoints = 0;
-    let computerPoints = 0;
-
-
-
-    for (i = 0; i < 5; i++) {
-        round.textContent = `Round ${i + 1}!`;
-        
-        
-        console.log(`You chose ${player}`);
-
-        let computer = computerPlay();
-        console.log(`The computer chose ${computer}`);
-
-        let result = playRound(player, computer);
-        console.log(result);
-        if (result == 'You won!') {
-            playerPoints++;
-        } else if (result == 'You lost') {
-            computerPoints++;
-        }
-        console.log(`You: ${playerPoints} - Computer: ${computerPoints}`);
-    }
-
-    if (playerPoints > computerPoints) {
-        console.log(`You won the game!`)
-    } else if (computerPoints > playerPoints) {
-        console.log('The computer won the game')
-    } else {
-        console.log('This game is a tie');
-    }
-}
-*/
-
-const buttons = document.querySelectorAll('.rps');
-const result = document.querySelector('.result');
-const round = document.querySelector('.round');
 const play = document.querySelector('.play');
+const buttons = document.querySelectorAll('.rps');
+const round = document.querySelector('.round');
 const playerText = document.querySelector('.player');
 const computerText = document.querySelector('.computer');
+const result = document.querySelector('.result');
+const score = document.querySelector('.score');
+const gameResult = document.querySelector('.gameResult');
 
-
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        playerText.textContent = `You chose ${button.textContent}`;
-        let computer = computerPlay();
-        computerText.textContent = `The computer chose ${computer}`;
-        let roundResult = playRound(button.textContent, computer);
-        result.textContent = roundResult;
+function game() {
+    let playerPoints = 0;
+    let computerPoints = 0;
+    let i = 0;
+    buttons.forEach((button) => {
+        button.disabled = false;
     });
-});
+    round.textContent = 'Choose';
+    gameResult.textContent = '';
+    score.textContent = `You: ${playerPoints} - Computer: ${computerPoints}`;
+    playerText.textContent = ``;
+    computerText.textContent = ``;
+    result.textContent = '';
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            i++;
+            round.textContent = `Round ${i}!`;
+            
+            let player = button.textContent;
+            let computer = computerPlay();
+            playerText.textContent = `You chose ${player}`;
+            computerText.textContent = `The computer chose ${computer}`;
+            
+            let roundResult = playRound(player, computer);
+            result.textContent = roundResult;
 
-/*play.addEventListener('click', () => {
+            if (roundResult == 'You won!') {
+                playerPoints++;
+            } else if (roundResult == 'You lost') {
+                computerPoints++;
+            }
+
+            score.textContent = `You: ${playerPoints} - Computer: ${computerPoints}`;
+
+            if (i == 5) {
+                buttons.forEach((button) => {
+                    button.disabled = true;
+                });
+                round.textContent = 'Game over';
+                
+
+                
+                if (playerPoints > computerPoints) {
+                    gameResult.textContent = `You won the game!`;
+                } else if (computerPoints > playerPoints) {
+                    gameResult.textContent = 'The computer won the game';
+                } else {
+                    gameResult.textContent = 'This game is a tie';
+                }
+            };    
+        });
+    });
+
+    
+        
+    
+    
+}
+        
+play.addEventListener('click', () => {
     game();
 });
-*/
